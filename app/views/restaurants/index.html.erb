@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Restaurants</h1>
+  </div>
+
+  <div class="col-sm-6 text-end">
+  <%= link_to new_restaurant_path, class: 'btn btn-primary' do %>
+    Add New Restaurant
+  <% end %>
+  </div>
+</div>
+
+<%= form_with url: restaurants_path, method: :get do |form| %>
+  <%= form.search_field :query %>
+  <%= form.button "Search" %>
+<% end %>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+
+        <th>Name</th>
+
+
+            <th>Cuisine</th>
+            <th>Description</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @restaurants.each do |restaurant| %>
+        <%= content_tag :tr, id: dom_id(restaurant), class: dom_class(restaurant) do %>
+
+            <td><%= link_to restaurant.name, restaurant %></td>
+
+
+                      <td><%= restaurant.cuisine %></td>
+                      <td><%= restaurant.description %></td>
+
+
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%== pagy_nav(@pagy) %>

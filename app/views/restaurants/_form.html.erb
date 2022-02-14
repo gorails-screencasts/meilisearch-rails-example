@@ -1,0 +1,44 @@
+<%= form_with(model: restaurant) do |form| %>
+  <% if restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+      <ul>
+      <% restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :cuisine, class: 'form-label' %>
+      <%= form.text_field :cuisine, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: 'form-label' %>
+      <%= form.text_field :description, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <% if restaurant.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', restaurant, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if restaurant.persisted? %>
+      <%= link_to "Cancel", restaurant, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", restaurants_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

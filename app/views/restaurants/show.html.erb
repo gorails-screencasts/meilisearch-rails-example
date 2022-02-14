@@ -1,0 +1,18 @@
+<div class="page-header">
+  <%= link_to restaurants_path, class: 'btn btn-default' do %>
+    All Restaurants
+  <% end %>
+  <%= link_to edit_restaurant_path(@restaurant), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show restaurant</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @restaurant.name %></dd>
+  <dt>Cuisine:</dt>
+  <dd><%= @restaurant.cuisine %></dd>
+  <dt>Description:</dt>
+  <dd><%= @restaurant.description %></dd>
+</dl>

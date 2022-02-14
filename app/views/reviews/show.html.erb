@@ -1,0 +1,16 @@
+<div class="page-header">
+  <%= link_to reviews_path, class: 'btn btn-default' do %>
+    All Reviews
+  <% end %>
+  <%= link_to edit_review_path(@review), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show review</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Restaurant:</dt>
+  <dd><%= @review.restaurant %></dd>
+  <dt>Body:</dt>
+  <dd><%= @review.body %></dd>
+</dl>
