@@ -1,48 +1,15 @@
 require "test_helper"
 
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @restaurant = restaurants(:one)
+  test "index should filter results with query" do
+    get restaurants_url(query: "Taco")
+    assert_select "a", text: restaurants(:taco_bell).name
+    assert_select "a", text: restaurants(:mcdonalds).name, count: 0
   end
 
-  test "should get index" do
+  test "index should render all results" do
     get restaurants_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_restaurant_url
-    assert_response :success
-  end
-
-  test "should create restaurant" do
-    assert_difference("Restaurant.count") do
-      post restaurants_url, params: { restaurant: { cuisine: @restaurant.cuisine, description: @restaurant.description, name: @restaurant.name } }
-    end
-
-    assert_redirected_to restaurant_url(Restaurant.last)
-  end
-
-  test "should show restaurant" do
-    get restaurant_url(@restaurant)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_restaurant_url(@restaurant)
-    assert_response :success
-  end
-
-  test "should update restaurant" do
-    patch restaurant_url(@restaurant), params: { restaurant: { cuisine: @restaurant.cuisine, description: @restaurant.description, name: @restaurant.name } }
-    assert_redirected_to restaurant_url(@restaurant)
-  end
-
-  test "should destroy restaurant" do
-    assert_difference("Restaurant.count", -1) do
-      delete restaurant_url(@restaurant)
-    end
-
-    assert_redirected_to restaurants_url
+    assert_select "a", text: restaurants(:taco_bell).name
+    assert_select "a", text: restaurants(:mcdonalds).name
   end
 end

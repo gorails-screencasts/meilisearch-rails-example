@@ -3,6 +3,13 @@ require_relative "../config/environment"
 require "rails/test_help"
 
 class ActiveSupport::TestCase
+  setup do
+    @@once ||= begin
+     MeiliSearch::Rails::Utilities.reindex_all_models
+     true
+   end
+  end
+
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
@@ -11,3 +18,5 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+MeiliSearch::Rails::Utilities.clear_all_indexes
